@@ -13,53 +13,78 @@ interface PackageJSON  {
   devDependencies: {[key: string]: string};
 }
 
-function checkIsAGitRepository() {
-  const isAGitRepo = execa.commandSync('git rev-parse --is-inside-work-tree').stdout;
+class Configuration {
+  isAGitRepository: boolean;
+  rootPackage: PackageJSON;
+  isMonorepo: boolean;
 
-  return isAGitRepo === 'true';
+  private getRootPackage(): PackageJSON {
+    if(this.isAGitRepository) {
+      const root = execa.commandSync('git rev-parse --show-toplevel').stdout;
+      const packageJSON: PackageJSON = require(resolve(root, 'package.json'));
+  
+      return packageJSON;
+    }
+  
+    log(chalk.red('This is not a git repository'))
+    process.exit(0);
+  }
+
+  private checkIsMonorepo(): boolean {
+    const packageJson = this.getRootPackage();
+    const errors = {
+      noPackageJSON: 'No package json found, please run the command in a node repository',
+      noWorkspace: 'No workspace found, this cannot be used outside of a monorepo',
+    }
+  
+    if(!packageJson) {
+      log(chalk.red(errors.noPackageJSON))
+      return false;
+    }
+  
+    if(!packageJson.workspaces) {
+      log(chalk.red(errors.noWorkspace))
+      return false;
+    }
+  
+    return true;
+  
+  }
+
+  constructor() {
+    this.isAGitRepository = execa.commandSync('git rev-parse --is-inside-work-tree').stdout === 'true';
+    this.rootPackage = this.getRootPackage();
+    this.isMonorepo = this.checkIsMonorepo();
+
+    if(!this.isMonorepo || !this.isAGitRepository) {
+      process.exit(0)
+    }
+  }
 }
 
-function getRootPackage() {
-  const isAGitRepo = checkIsAGitRepository();
-  if(isAGitRepo) {
-    const root = execa.commandSync('git rev-parse --show-toplevel').stdout;
-    const packageJSON: PackageJSON = require(resolve(root, 'package.json'));
+class MonorepoTooling extends Configuration {
+  private getChanged() {
+    const changes = execa.commandSync('git diff --name-only').stdout.split('\n').filter(value => value !== '')
+    
+    if(changes.length >= 1) {
+      return changes;
+    }
 
-    return packageJSON;
+    log(chalk.grey('No changed detected'));
+    log(chalk.grey('Exiting...'));
+    process.exit(0)
   }
 
-  log(chalk.red('This is not a git repository'))
-  process.exit(0);
-}
-
-function isMonorepo(): boolean {
-  const packageJson = getRootPackage();
-  const errors = {
-    noPackageJSON: 'No package json found, please run the command in a node repository',
-    noWorkspace: 'No workspace found, this cannot be used outside of a monorepo',
+  constructor() {
+    super()
   }
 
-  if(!packageJson) {
-    log(chalk.red(errors.noPackageJSON))
-    return false;
-  }
-
-  if(!packageJson.workspaces) {
-    log(chalk.red(errors.noWorkspace))
-    return false;
-  }
-
-  return true;
-
-}
-
-
-export default function main() {
-  const monorepo: boolean = isMonorepo();
-  if(monorepo) {
-    console.log(monorepo)
+  main() {
+    const changes = this.getChanged();
+    log(changes)
   }
 }
 
-main();
+const cli = new MonorepoTooling();
+cli.main();
 

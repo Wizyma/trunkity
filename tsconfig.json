@@ -2,6 +2,7 @@
   "include": ["src", "types"],
   "compilerOptions": {
     "module": "CommonJS",
+    "target": "ES2015",
     "lib": ["dom", "esnext"],
     "outDir": "dist",
     "importHelpers": true,
