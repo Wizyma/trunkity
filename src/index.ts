@@ -22,7 +22,8 @@ class Configuration {
   root: string;
   workspaceInfo: {
     name: string;
-    path: string
+    path: string;
+    workspacePath: string;
   }[]
   workspacesTree: {
     name: string,
@@ -33,6 +34,7 @@ class Configuration {
       peer: string[],
       direct: string[]
     },
+    pathsToIncludes: string[]
   }[]
   
   private getRootPackage(): PackageJSON {
@@ -121,6 +123,7 @@ class Configuration {
             json,
             name: json.name,
             path: packagePath,
+            workspacePath: packagePath.replace(`${this.root}/`, '')
           }
         }
 
@@ -149,19 +152,23 @@ class Configuration {
           ...Object.keys(json?.peerDependencies ?? {}),
           ...Object.keys(json?.dependencies ?? {}),
         ].filter(dep => dep.includes(this.rootPackage.name))
+        .filter((el, i, arr) => arr.indexOf(el) === i)
+
+        const pathsToIncludes = this.workspaceInfo.filter(info => deps.includes(info.name)).map(({ workspacePath }) => workspacePath)
 
         return {
           name,
           path,
           workspaceDependencies: deps,
           workspaceDependenciesByType: depsByType,
+          pathsToIncludes,
         }
       })
   }
 }
 
 class MonorepoTooling extends Configuration {
-  private getChanged() {
+  private getChanges() {
     const changes = execa.commandSync('git diff --name-only').stdout.split('\n').filter(value => value !== '')
     
     if(changes.length >= 1) {
@@ -180,11 +187,44 @@ class MonorepoTooling extends Configuration {
   main() {
     program
       .option('-a, --affected')
+      .option('-t, --tree')
       .parse(process.argv)
     
     if(program.affected) {
-      console.log(this.getChanged())
-      this.getWorkspaceTree()
+      const changes = this.getChanges();
+      console.log(changes);
+      const impacteds = changes.map(change => {
+        return this.workspacesTree
+          .map(tree => tree.pathsToIncludes)
+          .reduce((a, b) => a.concat(b), [])
+          .filter(path => change.includes(path))
+      })
+        .reduce((a, b) => a.concat(b), [])
+        .filter((el, i, arr) => arr.indexOf(el) === i)
+        .map(impacted => this.workspacesTree.filter(workspace => {
+          return workspace.pathsToIncludes.includes(impacted)
+        }))
+        .reduce((a, b) => a.concat(b), [])
+        .map(workspace => workspace.name)
+      
+      log(chalk.green('Your changes to: '))
+      changes.map(change => {
+        log(chalk.green('- ' + change))
+      })
+      log(chalk.green('will have an impact on: '))
+      impacteds.map(impact => {
+        log(chalk.red('- - ' + impact))
+      })
+    }
+
+    if(program.tree) {
+      const json = this.workspacesTree.map(({ name, path, workspaceDependencies }) => ({
+        name, 
+        path, 
+        workspaceDependencies,
+      }))
+
+      log(chalk.white(JSON.stringify(json, null, 2)))
     }
   }
 }
