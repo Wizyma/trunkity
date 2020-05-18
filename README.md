@@ -1,4 +1,6 @@
-# @tooling/monorepo
+![Node.js Package](https://github.com/Wizyma/monorepo-tooling/workflows/Node.js%20Package/badge.svg)
+
+# trunkity
 
 JS Monorepo CLI utils.
 The primary intention of this CLI is to detect what will you changes affects inside your monorepo.
@@ -6,18 +8,18 @@ The primary intention of this CLI is to detect what will you changes affects ins
 # Get Started
 with yarn 
 ```bash
-$ yarn add -g @monorepo/tooling
+$ yarn add -g trunkity
 
 # show affecteds
-$ repo -a # --affected 
+$ trunkity -a # --affected 
 ```
 
 with npm 
 ```bash
-$ npm i -g @monorepo/tooling
+$ npm i -g trunkity
 
 # show affecteds
-$ repo -a # --affected 
+$ trunkity -a # --affected 
 ```
 
 It can also be used as a dev dependencie.

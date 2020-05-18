@@ -209,14 +209,19 @@ class MonorepoTooling extends Configuration {
         .reduce((a, b) => a.concat(b), [])
         .map(workspace => workspace.name)
       
-      log(chalk.green('Your changes to: '))
-      changes.map(change => {
-        log(chalk.green('- ' + change))
-      })
-      log(chalk.green('will have an impact on: '))
-      impacteds.map(impact => {
-        log(chalk.red('- - ' + impact))
-      })
+      if(impacteds.length === 0) {
+        log(chalk.green('No affected changes inside the monorepo'))
+      } else {
+        log(chalk.green('Your changes to: '))
+        changes.map(change => {
+          log(chalk.green('- ' + change))
+        })
+        log(chalk.green('will have an impact on: '))
+        impacteds.map(impact => {
+          log(chalk.red('- - ' + impact))
+        })
+      }
+
     }
 
     if(program.tree) {

@@ -1,13 +1,13 @@
 {
-  "name": "@tooling/monorepo",
-  "version": "1.1.0",
+  "name": "trunkity",
+  "version": "0.1.0",
   "description": "CLI with usefull commands to be used in a monorepo",
   "main": "dist/index.js",
   "author": "André Gomes",
   "license": "MIT",
   "private": false,
   "bin": {
-    "repo": "./dist/index.js"
+    "trunkity": "./dist/index.js"
   },
   "publishConfig": {
     "access": "public"
