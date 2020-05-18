@@ -192,7 +192,6 @@ class MonorepoTooling extends Configuration {
     
     if(program.affected) {
       const changes = this.getChanges();
-      console.log(changes);
       const impacteds = changes.map(change => {
         return this.workspacesTree
           .map(tree => tree.pathsToIncludes)
