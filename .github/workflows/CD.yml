@@ -8,7 +8,7 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  release:
 
     runs-on: ubuntu-latest
 
@@ -25,6 +25,5 @@ jobs:
     - run: |
         npm install
         npm build
-    - name: Semantic Releaser
-      uses: brpaz/action-semantic-release@v1
+        npm run semantic-release
 
