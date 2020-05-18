@@ -15,12 +15,8 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '12'
-      - uses: borales/actions-yarn@v2.0.0
-        with:
-          cmd: install
-      - uses: borales/actions-yarn@v2.0.0
-        with:
-          cmd: build
+      - run: yarn install
+      - run: yarn build
 
   publish-npm:
     needs: build
@@ -30,12 +26,9 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '12'
-      - uses: borales/actions-yarn@v2.0.0
-        with:
-          cmd: install
-      - uses: borales/actions-yarn@v2.0.0
-        with:
-          cmd: semantic-release 
+      - run: yarn install
+      - run: yarn build
+      - run: semantic-release 
         env:
           GITHUB_TOKEN: ${{secrets.GH_TOKEN}}
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}
