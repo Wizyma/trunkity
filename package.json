@@ -16,6 +16,7 @@
   },
   "devDependencies": {
     "@types/execa": "^2.0.0",
+    "@types/fs-extra": "^9.0.0",
     "@types/node": "^13.13.5",
     "git-cz": "^4.3.1",
     "typescript": "^3.8.3"
@@ -24,6 +25,7 @@
     "chalk": "^4.0.0",
     "commander": "^5.1.0",
     "execa": "^4.0.1",
+    "fs-extra": "^9.0.0",
     "tslib": "^1.11.2"
   }
 }
