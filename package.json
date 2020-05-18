@@ -1,6 +1,6 @@
 {
   "name": "@tooling/monorepo",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "CLI with usefull commands to be used in a monorepo",
   "main": "dist/index.js",
   "author": "André Gomes",
@@ -40,13 +40,13 @@
   },
   "release": {
     "plugins": [
-     "@semantic-release/commit-analyzer",
-     "@semantic-release/release-notes-generator",
-     "@semantic-release/npm",
-     "@semantic-release/changelog",
-     "@semantic-release/git"
-   ]
- },
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/npm",
+      "@semantic-release/changelog",
+      "@semantic-release/git"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/Wizyma/monorepo-tooling.git"
