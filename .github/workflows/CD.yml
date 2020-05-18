@@ -23,5 +23,5 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm run build
-    - name: Semantic Releaser
     - uses: brpaz/action-semantic-release@v1
+    - name: Semantic Releaser
