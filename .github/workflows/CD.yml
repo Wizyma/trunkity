@@ -22,8 +22,9 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm install
-    - run: npm run build
-    - uses: brpaz/action-semantic-release@v1
+    - run: |
+        npm install
+        npm build
     - name: Semantic Releaser
-    - run: npm run semantic-release
+      uses: brpaz/action-semantic-release@v1
+
