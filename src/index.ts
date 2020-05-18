@@ -136,21 +136,24 @@ class Configuration {
     return this.getWorkspacesInfo()
       // @ts-ignore
       .map(({ name, json, path }) => {
+        const dev = Object.keys(json?.devDependencies ?? {});
+        const peer = Object.keys(json?.peerDependencies ?? {});
+        const direct = Object.keys(json?.dependencies ?? {});
         const depsByType = {
           dev: [
-            ...Object.keys(json?.devDependencies ?? {}),
+            ...dev,
           ].filter(dep => dep.includes(this.rootPackage.name)),
           peer: [
-            ...Object.keys(json?.peerDependencies ?? {}),
+            ...peer,
           ].filter(dep => dep.includes(this.rootPackage.name)),
           direct: [
-            ...Object.keys(json?.dependencies ?? {}),
+            ...direct,
           ].filter(dep => dep.includes(this.rootPackage.name)),
         }
         const deps = [
-          ...Object.keys(json?.devDependencies ?? {}),
-          ...Object.keys(json?.peerDependencies ?? {}),
-          ...Object.keys(json?.dependencies ?? {}),
+          ...dev,
+          ...peer,
+          ...direct,
         ].filter(dep => dep.includes(this.rootPackage.name))
         .filter((el, i, arr) => arr.indexOf(el) === i)
 
