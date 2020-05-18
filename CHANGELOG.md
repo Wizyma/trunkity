@@ -1,3 +1,30 @@
+# 1.0.0 (2020-05-18)
+
+
+### Bug Fixes
+
+* 🐛 remove console.log ([2f4c740](https://github.com/Wizyma/monorepo-tooling/commit/2f4c7408ac62eda725c2234844eb7846d274aa9f))
+
+
+### chore
+
+* 🤖 npm publish du to unverified email ([f5d7e19](https://github.com/Wizyma/monorepo-tooling/commit/f5d7e193190ab431a1ce6af38119a1f08a1f1ab9))
+
+
+### Features
+
+* 🎸 add workspace tree ([c58cd2a](https://github.com/Wizyma/monorepo-tooling/commit/c58cd2a8da8a4b36ac74e3daaab79c4f6c6cd719))
+* 🎸 catch no changes + repo naming ([c7f467d](https://github.com/Wizyma/monorepo-tooling/commit/c7f467df19a90b9426dc258ffddf0c26a3859d47))
+* 🎸 get affected package based on changes ([453811a](https://github.com/Wizyma/monorepo-tooling/commit/453811a6631e022f11c48ff7845914143159dcaa))
+* 🎸 use classes instead of functions ([e2c63ea](https://github.com/Wizyma/monorepo-tooling/commit/e2c63ea7368454adc2bb372a8b5dd5824f9703d5))
+* 🎸 use less Object.keys ([3f2d493](https://github.com/Wizyma/monorepo-tooling/commit/3f2d49379375f98728d5cc11673822f7b0e4b231))
+
+
+### BREAKING CHANGES
+
+* 🧨 force breaking change for bump
+* 🧨 package name
+
 # [2.0.0](https://github.com/Wizyma/monorepo-tooling/compare/v1.1.0...v2.0.0) (2020-05-18)
 
 
