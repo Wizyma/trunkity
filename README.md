@@ -1,9 +1,12 @@
-![Node.js Package](https://github.com/Wizyma/monorepo-tooling/workflows/Node.js%20Package/badge.svg)
+![](https://img.shields.io/github/workflow/status/Wizyma/trunkity/CD?label=trunkity%20Build&style=for-the-badge)
+![](https://img.shields.io/npm/v/trunkity?label=trunkity&style=for-the-badge)
 
 # trunkity
 
 JS Monorepo CLI utils.
 The primary intention of this CLI is to detect what will you changes affects inside your monorepo.
+
+![screen](./assets/screen.gif)
 
 # Get Started
 with yarn 
