@@ -5,6 +5,7 @@
     "target": "ES2015",
     "lib": ["dom", "esnext"],
     "outDir": "dist",
+    "declarationDir": "dist/types",
     "importHelpers": true,
     "declaration": true,
     "sourceMap": true,
