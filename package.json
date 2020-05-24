@@ -16,6 +16,7 @@
     "dev": "tsc --watch",
     "build": "tsc",
     "commit": "git-cz",
+    "format": "prettier --write \"src/*.{ts}\"",
     "semantic-release": "semantic-release"
   },
   "devDependencies": {
@@ -28,6 +29,9 @@
     "@types/fs-extra": "^9.0.0",
     "@types/node": "^13.13.5",
     "git-cz": "^4.3.1",
+    "husky": ">=4",
+    "lint-staged": ">=10",
+    "prettier": "2.0.5",
     "semantic-release": "^17.0.7",
     "typescript": "^3.8.3"
   },
@@ -50,5 +54,13 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/Wizyma/monorepo-tooling.git"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/*.{ts}": "prettier --write"
   }
 }
