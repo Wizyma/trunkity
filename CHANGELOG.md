@@ -1,3 +1,11 @@
+# [1.2.0](https://github.com/Wizyma/monorepo-tooling/compare/v1.1.0...v1.2.0) (2020-05-24)
+
+
+### Features
+
+* 🎸 add prettier ([77f0458](https://github.com/Wizyma/monorepo-tooling/commit/77f04587d923b03f04a18583a55567fe9f8a5d99))
+* 🎸 prettier config ([a2942c5](https://github.com/Wizyma/monorepo-tooling/commit/a2942c54241eeefef97e045b46ba6e5f528a2e7d))
+
 # [1.1.0](https://github.com/Wizyma/monorepo-tooling/compare/v1.0.0...v1.1.0) (2020-05-24)
 
 
