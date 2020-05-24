@@ -8,26 +8,17 @@ import Tooling from './tooling';
 const { log } = console;
 
 program
-  .option('-a, --affected')
-  .option('-t, --tree')
+  .name('affected')
+  .option('-a, --affected [since]', 'Get affected changes since given ref, (default: master)')
+  .option('-t, --tree', 'Parse repository to get a json representation of the internal dependency tree')
+  .option('-n, --namespace', 'Return the namespace of the monorepo')
+  .option('-o, --only-changed [since]', 'Return only packages changes since given ref, (default: master)')
   .parse(process.argv)
 
 if(program.affected) {
+  const ref = typeof program.affected === 'string' ? program.affected : 'master';
   const tools = new Tooling();
-  const changes = tools.getChanges();
-  const impacteds = changes.map(change => {
-    return tools.workspacesTree
-      .map(tree => tree.pathsToIncludes)
-      .reduce((a, b) => a.concat(b), [])
-      .filter(path => change.includes(path))
-  })
-    .reduce((a, b) => a.concat(b), [])
-    .filter((el, i, arr) => arr.indexOf(el) === i)
-    .map(impacted => tools.workspacesTree.filter(workspace => {
-      return workspace.pathsToIncludes.includes(impacted)
-    }))
-    .reduce((a, b) => a.concat(b), [])
-    .map(workspace => workspace.name)
+  const { impacteds, changes } = tools.getChangesWithAffecteds(ref);
   
   if(impacteds.length === 0) {
     log(chalk.green('No affected changes inside the monorepo'))
@@ -41,7 +32,6 @@ if(program.affected) {
       log(chalk.red('- - ' + impact))
     })
   }
-
 }
 
 if(program.tree) {
@@ -53,5 +43,27 @@ if(program.tree) {
   }))
 
   log(chalk.white(JSON.stringify(json, null, 2)))
+}
+
+if(program.namespace) {
+  const tools = new Tooling();
+  log(chalk.white(tools.rootPackage.name))
+}
+
+if(program.onlyChanged) {
+  const ref = typeof program.onlyChanged === 'string' ? program.onlyChanged : 'master';
+  const tools = new Tooling();
+  /**
+   * In the case of using lerna commands, and wanting to pipe to make several 
+   * operations to the changed packaged, you would have to use the output of this
+   * and transform it like 'replace('@'+tools.rootPackage.name, '*')' to construct a string similar to
+   * '{namespace, *\/foo, *\/bar}'
+   * 
+   * the command could then be: lerna run test --scope '{namespace, *\/foo, *\/bar}'
+   * can be really usefull in CI env, since the lerna command --since act weird sometimes.
+   */
+  const changes = tools.getChangesWithoutAffecteds(ref).join(',');
+
+  log(chalk.white(changes))
 }
 
