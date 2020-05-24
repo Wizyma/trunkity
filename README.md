@@ -6,8 +6,6 @@
 JS Monorepo CLI utils.
 The primary intention of this CLI is to detect what will you changes affects inside your monorepo.
 
-![screen](./assets/screen.gif)
-
 # Get Started
 with yarn 
 ```bash
