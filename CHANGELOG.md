@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/Wizyma/monorepo-tooling/compare/v1.0.0...v1.1.0) (2020-05-24)
+
+
+### Features
+
+* 🎸 add new commands ([44f6f58](https://github.com/Wizyma/monorepo-tooling/commit/44f6f58f55160d0d7eec2b6c106595f4eca1cfe8))
+
 # 1.0.0 (2020-05-18)
 
 
