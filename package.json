@@ -16,6 +16,7 @@
     "dev": "tsc --watch",
     "build": "tsc",
     "commit": "git-cz",
+    "format": "prettier --write \"src/*.{ts}\"",
     "semantic-release": "semantic-release"
   },
   "devDependencies": {
@@ -60,6 +61,6 @@
     }
   },
   "lint-staged": {
-    "*.{ts,md}": "prettier --write"
+    "src/*.{ts}": "prettier --write"
   }
 }
