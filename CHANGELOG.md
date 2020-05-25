@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/Wizyma/monorepo-tooling/compare/v1.2.0...v1.2.1) (2020-05-25)
+
+
+### Bug Fixes
+
+* 🐛 use relative path instead of absoluth path ([d706614](https://github.com/Wizyma/monorepo-tooling/commit/d706614040987c808a49e718ade6ad12eaf297aa))
+
 # [1.2.0](https://github.com/Wizyma/monorepo-tooling/compare/v1.1.0...v1.2.0) (2020-05-24)
 
 
