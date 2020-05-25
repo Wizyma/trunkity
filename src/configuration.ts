@@ -92,9 +92,9 @@ export default class Configuration {
     const workspaces = this.rootPackage.workspaces;
     const dirsPath = workspaces.map((workspace) => {
       if (workspace.includes('*')) {
-        return `${this.root}/${workspace.replace('*', '')}`;
+        return `${workspace.replace('*', '')}`;
       }
-      return `${this.root}/${workspace}`;
+      return `${workspace}`;
     });
 
     return dirsPath
