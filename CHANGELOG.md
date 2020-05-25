@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/Wizyma/monorepo-tooling/compare/v1.2.1...v1.2.2) (2020-05-25)
+
+
+### Bug Fixes
+
+* 🐛 crash when not in root directory ([806f950](https://github.com/Wizyma/monorepo-tooling/commit/806f950e826ddceb61cd0bbdfed9d4392559e361)), closes [#10](https://github.com/Wizyma/monorepo-tooling/issues/10)
+
 ## [1.2.1](https://github.com/Wizyma/monorepo-tooling/compare/v1.2.0...v1.2.1) (2020-05-25)
 
 
