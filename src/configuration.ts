@@ -46,7 +46,7 @@ export default class Configuration {
   }
 
   private checkIsMonorepo(): boolean {
-    const packageJson = this.getRootPackage();
+    const packageJson = this.rootPackage;
     const errors = {
       noPackageJSON: 'No package json found, please run the command in a node repository',
       noWorkspace: 'No workspace found, this cannot be used outside of a monorepo',
@@ -73,8 +73,8 @@ export default class Configuration {
     }
 
     this.root = execa.commandSync('git rev-parse --show-toplevel').stdout;
-    this.isMonorepo = this.checkIsMonorepo();
     this.rootPackage = this.getRootPackage();
+    this.isMonorepo = this.checkIsMonorepo();
 
     if (!this.isMonorepo) {
       process.exit(1);
@@ -99,7 +99,7 @@ export default class Configuration {
 
     return dirsPath
       .map((dir) => {
-        return fse.readdirSync(dir).map((packagePath) => {
+        return fse.readdirSync(resolve(`${this.root}/${dir}`)).map((packagePath) => {
           const fullPath = `${dir}/${packagePath}`;
           if (fullPath.includes('//')) {
             return fullPath.replace('//', '/');
@@ -112,7 +112,8 @@ export default class Configuration {
         return a.concat(b);
       }, [])
       .map((packagePath) => {
-        const json = fse.readJSONSync(`${packagePath}/package.json`, { throws: false });
+        const json = fse.readJSONSync(`${this.root}/${packagePath}/package.json`, { throws: false });
+        
         if (json) {
           return {
             json,
