@@ -62,7 +62,12 @@ if (program.onlyChanged) {
    * the command could then be: lerna run test --scope '{namespace, *\/foo, *\/bar}'
    * can be really usefull in CI env, since the lerna command --since act weird sometimes.
    */
-  const changes = tools.getChangesWithoutAffecteds(ref).join(',');
+  const changes = tools.getChangesWithoutAffecteds(ref);
+  const set = new Set(changes);
+  let map: string[] = []
+  set.forEach(item => {
+    map.push(item)
+  })
 
-  log(chalk.white(changes));
+  log(chalk.white(map.join(',')));
 }
