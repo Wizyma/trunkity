@@ -72,7 +72,18 @@ export default class Configuration {
     if (!this.isAGitRepository) {
       process.exit(1);
     }
-    this.currentBranch = execa.commandSync('git symbolic-ref -q --short HEAD').stdout;
+
+    if(process.env.CI) {
+      if(process.env.CI_COMMIT_REF_NAME) {
+        this.currentBranch = process.env.CI_COMMIT_REF_NAME;
+      } else {
+        log(chalk.gray('Couldnt resolve current branch'))
+        process.exit(1)
+      }
+    } else {
+      this.currentBranch = execa.commandSync('git symbolic-ref -q --short HEAD').stdout;
+    }
+
     this.root = execa.commandSync('git rev-parse --show-toplevel').stdout;
     this.rootPackage = this.getRootPackage();
     this.isMonorepo = this.checkIsMonorepo();
