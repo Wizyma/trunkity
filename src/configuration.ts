@@ -73,12 +73,12 @@ export default class Configuration {
       process.exit(1);
     }
 
-    if(process.env.CI) {
-      if(process.env.CI_COMMIT_REF_NAME) {
+    if (process.env.CI) {
+      if (process.env.CI_COMMIT_REF_NAME) {
         this.currentBranch = process.env.CI_COMMIT_REF_NAME;
       } else {
-        log(chalk.gray('Couldnt resolve current branch'))
-        process.exit(1)
+        log(chalk.gray('Couldnt resolve current branch'));
+        process.exit(1);
       }
     } else {
       this.currentBranch = execa.commandSync('git symbolic-ref -q --short HEAD').stdout;
@@ -125,7 +125,7 @@ export default class Configuration {
       }, [])
       .map((packagePath) => {
         const json = fse.readJSONSync(`${this.root}/${packagePath}/package.json`, { throws: false });
-        
+
         if (json) {
           return {
             json,
