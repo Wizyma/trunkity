@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/Wizyma/monorepo-tooling/compare/v1.2.5...v1.3.0) (2020-05-28)
+
+
+### Features
+
+* 🎸 add gitlab ci env ([8677dce](https://github.com/Wizyma/monorepo-tooling/commit/8677dce84cd875e002a5a3bb40860eaefe6fdf6b))
+
 ## [1.2.5](https://github.com/Wizyma/monorepo-tooling/compare/v1.2.4...v1.2.5) (2020-05-28)
 
 

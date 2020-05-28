@@ -1,6 +1,6 @@
 {
   "name": "trunkity",
-  "version": "1.2.5",
+  "version": "1.3.0",
   "description": "CLI with usefull commands to be used in a monorepo",
   "main": "dist/index.js",
   "author": "André Gomes",
