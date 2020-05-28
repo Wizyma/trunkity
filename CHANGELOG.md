@@ -1,3 +1,11 @@
+## [1.2.3](https://github.com/Wizyma/monorepo-tooling/compare/v1.2.2...v1.2.3) (2020-05-28)
+
+
+### Bug Fixes
+
+* 🐛 dedup only changed ([bf5923a](https://github.com/Wizyma/monorepo-tooling/commit/bf5923add91364f8624a26c9da4953f1c5746993))
+* 🐛 format string output ([931af35](https://github.com/Wizyma/monorepo-tooling/commit/931af35f43a3d6faf8d4476ebb30785ce8571353))
+
 ## [1.2.2](https://github.com/Wizyma/monorepo-tooling/compare/v1.2.1...v1.2.2) (2020-05-25)
 
 
