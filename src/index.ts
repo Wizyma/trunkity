@@ -29,10 +29,10 @@ if (program.affected) {
     });
     log(chalk.green('will have an impact on: '));
     const set = new Set(impacteds);
-    let map: string[] = []
-    set.forEach(item => {
-      map.push(item)
-    })
+    let map: string[] = [];
+    set.forEach((item) => {
+      map.push(item);
+    });
     map.forEach((impact) => {
       log(chalk.red('- - ' + impact));
     });
@@ -69,10 +69,10 @@ if (program.onlyChanged) {
    */
   const changes = tools.getChangesWithoutAffecteds(ref);
   const set = new Set(changes);
-  let map: string[] = []
-  set.forEach(item => {
-    map.push(item)
-  })
+  let map: string[] = [];
+  set.forEach((item) => {
+    map.push(item);
+  });
 
   log(chalk.white(map.join('\n')));
 }
