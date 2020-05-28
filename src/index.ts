@@ -28,7 +28,12 @@ if (program.affected) {
       log(chalk.green('- ' + change));
     });
     log(chalk.green('will have an impact on: '));
-    impacteds.map((impact) => {
+    const set = new Set(impacteds);
+    let map: string[] = []
+    set.forEach(item => {
+      map.push(item)
+    })
+    map.forEach((impact) => {
       log(chalk.red('- - ' + impact));
     });
   }
@@ -69,5 +74,5 @@ if (program.onlyChanged) {
     map.push(item)
   })
 
-  log(chalk.white(map.join(',')));
+  log(chalk.white(map.join('\n')));
 }
