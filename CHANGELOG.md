@@ -1,3 +1,10 @@
+## [1.2.5](https://github.com/Wizyma/monorepo-tooling/compare/v1.2.4...v1.2.5) (2020-05-28)
+
+
+### Bug Fixes
+
+* 🐛 use old git command to get current branch ([90565a5](https://github.com/Wizyma/monorepo-tooling/commit/90565a50e8e5c48ff6ef6514ad7d573782e5a6e2))
+
 ## [1.2.4](https://github.com/Wizyma/monorepo-tooling/compare/v1.2.3...v1.2.4) (2020-05-28)
 
 
