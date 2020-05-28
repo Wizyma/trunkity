@@ -1,3 +1,10 @@
+## [1.2.4](https://github.com/Wizyma/monorepo-tooling/compare/v1.2.3...v1.2.4) (2020-05-28)
+
+
+### Bug Fixes
+
+* 🐛 issues on command changes-only ([4c3aaab](https://github.com/Wizyma/monorepo-tooling/commit/4c3aaabab7809da2d24de4e7500023a4cbc6dc70))
+
 ## [1.2.3](https://github.com/Wizyma/monorepo-tooling/compare/v1.2.2...v1.2.3) (2020-05-28)
 
 
