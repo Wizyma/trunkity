@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/Wizyma/monorepo-tooling/compare/v1.3.0...v1.3.1) (2020-05-28)
+
+
+### Bug Fixes
+
+* 🐛 gitlab ci env ([38124d9](https://github.com/Wizyma/monorepo-tooling/commit/38124d98089979ec71f937cfd255a80e16f47d9a))
+
 # [1.3.0](https://github.com/Wizyma/monorepo-tooling/compare/v1.2.5...v1.3.0) (2020-05-28)
 
 
