@@ -37,7 +37,7 @@ export default class Tooling extends Configuration {
   }
 
   public getChangesWithoutAffecteds(ref: string) {
-    const currentBrahnch = execa.commandSync('git branch --show-current').stdout;
+    const currentBrahnch = this.currentBranch;
     const changes = execa
       .commandSync(`git diff --name-only ${ref}..${currentBrahnch}`)
       .stdout.split('\n')
@@ -46,7 +46,7 @@ export default class Tooling extends Configuration {
   }
 
   public getChangesWithAffecteds(ref: string) {
-    const currentBrahnch = execa.commandSync('git branch --show-current').stdout;
+    const currentBrahnch = this.currentBranch;
     const changes = execa
       .commandSync(`git diff --name-only ${ref}..${currentBrahnch}`)
       .stdout.split('\n')

@@ -33,6 +33,7 @@ export default class Configuration {
     };
     pathsToIncludes: string[];
   }[];
+  currentBranch: string;
 
   private getRootPackage(): PackageJSON {
     if (this.isAGitRepository) {
@@ -71,7 +72,7 @@ export default class Configuration {
     if (!this.isAGitRepository) {
       process.exit(1);
     }
-
+    this.currentBranch = execa.commandSync('git symbolic-ref -q --short HEAD').stdout;
     this.root = execa.commandSync('git rev-parse --show-toplevel').stdout;
     this.rootPackage = this.getRootPackage();
     this.isMonorepo = this.checkIsMonorepo();
