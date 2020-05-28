@@ -6,16 +6,23 @@ import Configuration from './configuration';
 const { log } = console;
 
 export default class Tooling extends Configuration {
+  private _getChangedPackages(changes: string[]) {
+    return changes
+      .map(change => this.workspacesTree
+        .filter(tree => change.includes(tree.path)))
+      .reduce((a, b) => a.concat(b), [])
+      .map(changed => changed.name)
+  }
+
   private _impacteds(changes: string[]) {
     return changes
       .map((change) => {
         return this.workspacesTree
           .map((tree) => tree.pathsToIncludes)
           .reduce((a, b) => a.concat(b), [])
-          .filter((path) => change.includes(path));
+          .filter((path, i, arr) => arr.indexOf(path) === i && change.includes(path))
       })
       .reduce((a, b) => a.concat(b), [])
-      .filter((el, i, arr) => arr.indexOf(el) === i)
       .map((impacted) =>
         this.workspacesTree.filter((workspace) => {
           return workspace.pathsToIncludes.includes(impacted);
@@ -35,8 +42,7 @@ export default class Tooling extends Configuration {
       .commandSync(`git diff --name-only ${ref}..${currentBrahnch}`)
       .stdout.split('\n')
       .filter((value) => value !== '');
-
-    return this._impacteds(changes);
+    return this._getChangedPackages(changes)
   }
 
   public getChangesWithAffecteds(ref: string) {
