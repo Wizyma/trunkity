@@ -46,7 +46,7 @@ if (program.tree) {
     path,
     workspaceDependencies,
   }));
-
+  console.log('salut')
   log(chalk.white(JSON.stringify(json, null, 2)));
 }
 
